@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ENVI Nutrition — Hormonal Balance, By Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas:   #FDFCFB;
+  --warm:     #F7F4F1;
+  --border:   #E5DDD7;
+  --rose:     #B8966E;
+  --rose-lt:  #D4B896;
+  --ash:      #8A8078;
+  --ink:      #2A2420;
+  --charcoal: #3D3530;
+  --serif:    'Cormorant Garamond', serif;
+  --sans:     'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  margin: 0; padding: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(253,252,251,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 76px; transition: box-shadow 0.3s;
+}
+.nav-logo img { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ash);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--canvas) !important;
+  padding: 12px 26px;
+  font-size: 10px !important; font-weight: 500 !important;
+  letter-spacing: 2.5px !important;
+  text-decoration: none;
+  transition: background 0.25s !important;
+}
+.nav-cta:hover { background: var(--rose) !important; }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  margin-top: 76px;
+}
+.hero-left {
+  background: var(--ink);
+  padding: 100px 72px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.hero-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 28px;
+}
+.hero-headline {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 64px; line-height: 1.08; color: var(--canvas);
+  margin-bottom: 32px;
+}
+.hero-headline em { color: var(--rose-lt); font-style: italic; }
+.hero-sub {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; max-width: 400px; margin-bottom: 52px;
+}
+.hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-rose {
+  display: inline-block; padding: 15px 34px;
+  background: var(--rose); color: var(--canvas);
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-rose:hover { background: var(--rose-lt); transform: translateY(-1px); }
+.btn-ghost-light {
+  display: inline-block; padding: 15px 34px;
+  border: 1px solid rgba(255,255,255,0.18); color: #B0A89E;
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+.btn-ghost-light:hover { border-color: var(--rose); color: var(--rose); }
+
+.hero-right {
+  background: var(--warm);
+  display: flex; align-items: center; justify-content: center;
+  padding: 80px 60px; position: relative; overflow: hidden;
+}
+.hero-right::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 55% 45%, rgba(184,150,110,0.1) 0%, transparent 65%);
+}
+.hero-right-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 40px;
+  width: 100%; max-width: 460px;
+}
+.bottle-img {
+  width: 100%; max-width: 380px; height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 28px 56px rgba(42,36,32,0.14));
+  animation: floatUp 1.2s ease both;
+}
+.hero-stats {
+  display: flex; width: 100%; max-width: 360px;
+  border: 1px solid var(--border); background: var(--canvas);
+}
+.hero-stat {
+  flex: 1; padding: 20px 16px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.hero-stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--serif); font-size: 34px; font-weight: 300;
+  color: var(--rose); line-height: 1; margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ash);
+}
+
+/* ── MARQUEE ── */
+.strip {
+  background: var(--rose); padding: 13px 0;
+  overflow: hidden; white-space: nowrap;
+}
+.strip-track {
+  display: inline-flex; animation: marquee 24s linear infinite;
+}
+.strip-item {
+  font-size: 9px; font-weight: 500; letter-spacing: 3.5px;
+  text-transform: uppercase; color: var(--canvas); padding: 0 36px;
+}
+.strip-sep { color: rgba(255,255,255,0.35); padding: 0 4px; }
+
+/* ── SECTIONS ── */
+.section { padding: 112px 64px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 18px;
+}
+.section-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 50px; line-height: 1.12; color: var(--ink); margin-bottom: 22px;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+.section-body {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: var(--charcoal); max-width: 540px;
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; align-items: start; margin-top: 68px;
+}
+.pull-quote {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 28px; line-height: 1.75; color: var(--ink);
+  border-left: 1px solid var(--rose); padding-left: 28px; margin-bottom: 36px;
+}
+.pillars { display: flex; flex-direction: column; gap: 2px; }
+.pillar {
+  padding: 26px 30px; border: 1px solid var(--border);
+  transition: background 0.2s, border-color 0.2s; cursor: default;
+}
+.pillar:hover { background: var(--warm); border-color: var(--rose-lt); }
+.pillar-num {
+  font-family: var(--serif); font-style: italic;
+  font-size: 11px; color: var(--rose); margin-bottom: 5px;
+}
+.pillar-name {
+  font-family: var(--serif); font-size: 19px;
+  font-weight: 400; color: var(--ink); margin-bottom: 5px;
+}
+.pillar-desc { font-size: 13px; font-weight: 300; color: var(--ash); line-height: 1.7; }
+
+/* ── PATHWAYS ── */
+.pathways { background: var(--warm); }
+.pathways-intro {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 80px; margin-bottom: 64px; align-items: end;
+}
+.pathways-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.pathway {
+  padding: 44px 38px; border: 1px solid var(--border);
+  background: var(--canvas);
+  transition: transform 0.25s, box-shadow 0.25s; cursor: default;
+}
+.pathway:nth-child(even) { background: var(--warm); }
+.pathway:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 40px rgba(42,36,32,0.08);
+}
+.pathway-num {
+  font-family: var(--serif); font-size: 52px; font-weight: 300;
+  color: var(--border); line-height: 1; margin-bottom: 14px;
+}
+.pathway-title {
+  font-family: var(--serif); font-size: 24px;
+  font-weight: 400; color: var(--ink); margin-bottom: 12px;
+}
+.pathway-body {
+  font-size: 13px; font-weight: 300; line-height: 1.85;
+  color: var(--charcoal); margin-bottom: 20px;
+}
+.pathway-ings {
+  font-size: 9px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--rose);
+}
+
+/* ── PRODUCT ── */
+.product { background: var(--ink); }
+.product-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+}
+.product-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; margin-bottom: 44px;
+}
+.product-specs { margin-bottom: 44px; }
+.spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 13px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.spec-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ash);
+}
+.spec-value { font-size: 13px; font-weight: 300; color: #D4C0A8; text-align: right; }
+.product-bottle {
+  display: flex; align-items: center; justify-content: center;
+}
+.product-bottle img {
+  width: 100%; max-width: 400px; height: auto; object-fit: contain;
+  filter: drop-shadow(0 32px 64px rgba(0,0,0,0.45));
+}
+.btn-canvas {
+  display: inline-block; padding: 15px 36px;
+  background: var(--canvas); color: var(--ink);
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s, color 0.25s;
+}
+.btn-canvas:hover { background: var(--rose); color: var(--canvas); }
+
+/* ── CLINICS ── */
+.clinics-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px; margin-top: 64px;
+}
+.clinic-card {
+  padding: 42px 34px; border: 1px solid var(--border);
+  transition: background 0.2s; cursor: default;
+}
+.clinic-card:hover { background: var(--warm); }
+.clinic-icon {
+  font-family: var(--serif); font-size: 32px;
+  color: var(--rose); margin-bottom: 16px; line-height: 1;
+}
+.clinic-title {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 400; color: var(--ink); margin-bottom: 10px;
+}
+.clinic-body { font-size: 13px; font-weight: 300; color: var(--ash); line-height: 1.8; }
+.clinic-cta-block {
+  margin-top: 60px; padding: 56px; text-align: center;
+  background: var(--warm); border: 1px solid var(--border);
+}
+.clinic-cta-title {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 32px; color: var(--ink); margin-bottom: 10px;
+}
+.clinic-cta-sub {
+  font-size: 14px; font-weight: 300; color: var(--ash);
+  margin-bottom: 30px; max-width: 480px;
+  margin-left: auto; margin-right: auto; line-height: 1.8;
+}
+.btn-dark {
+  display: inline-block; padding: 15px 38px;
+  background: var(--ink); color: var(--canvas);
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s;
+}
+.btn-dark:hover { background: var(--rose); }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 72px 64px 36px; }
+.footer-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 56px; margin-bottom: 56px;
+}
+.footer-logo img { height: 26px; width: auto; display: block; margin-bottom: 18px; }
+.footer-tagline {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 14px; color: #8A7E78; line-height: 1.75; max-width: 220px;
+}
+.footer-col-title {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 18px;
+}
+.footer-col a {
+  display: block; font-size: 13px; font-weight: 300;
+  color: #6A6058; text-decoration: none; margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--canvas); }
+.footer-bottom {
+  max-width: 1080px; margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 11px; font-weight: 300; color: #4A4038; }
+.footer-disc {
+  font-size: 11px; font-weight: 300; color: #4A4038;
+  max-width: 480px; text-align: right; line-height: 1.65;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 28px; }
+  .nav-links { gap: 16px; }
+  .hero { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .hero-left { padding: 72px 32px; }
+  .hero-headline { font-size: 46px; }
+  .section { padding: 80px 32px; }
+  .philosophy-grid, .pathways-intro, .product-grid { grid-template-columns: 1fr; gap: 48px; }
+  .pathways-grid, .clinics-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 38px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-disc { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="#">
+      <img src="https://raw.githubusercontent.com/ssekrieh/envi-website/main/envi-logo-black.PNG" alt="ENVI Nutrition"/>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="#science">The Science</a>
+    <a href="#product">The Formula</a>
+    <a href="#clinics">For Clinics</a>
+    <a href="#about">About</a>
+    <a href="#contact" class="nav-cta">Clinic Enquiries</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Hormonal Wellness &middot; GCC</div>
+    <h1 class="hero-headline">Where energy<br>meets <em>vitality.</em></h1>
+    <p class="hero-sub">A precision hormonal supplement crafted for the woman who knows her body deserves the very best. Science-led. Minimal. Beautifully considered.</p>
+    <div class="hero-ctas">
+      <a href="#product" class="btn-rose">Discover the Formula</a>
+      <a href="#clinics" class="btn-ghost-light">For Clinics</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <img
+        class="bottle-img"
+        src="https://raw.githubusercontent.com/ssekrieh/envi-website/main/Bottle_Design_2.png"
+        alt="ENVI Hormonal Balance"
+      />
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Pathways</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Ingredients</div>
+        </div>
+        <div class="hero-stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Fillers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MARQUEE -->
+<div class="strip">
+  <div class="strip-track">
+    <span class="strip-item">Halal Certified</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Plant-Based Capsules</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Clinically Dosed</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">GCC Compliant</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">No Proprietary Blends</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Transparent Formulation</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Premium Women&rsquo;s Wellness</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Halal Certified</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Plant-Based Capsules</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Clinically Dosed</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">GCC Compliant</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">No Proprietary Blends</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Transparent Formulation</span><span class="strip-sep">&middot;</span>
+    <span class="strip-item">Premium Women&rsquo;s Wellness</span><span class="strip-sep">&middot;</span>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="section" id="about" style="background:var(--canvas);">
+  <div class="section-inner">
+    <span class="eyebrow reveal">Our Philosophy</span>
+    <div class="philosophy-grid">
+      <div class="reveal">
+        <div class="pull-quote">Precision hormonal nutrition, crafted for the woman who knows her body deserves the very best.</div>
+        <p class="section-body">ENVI was born from a simple belief &mdash; that when a woman&rsquo;s hormones are in balance, her energy rises and her vitality follows.<br><br>We built the formula we wished existed: minimal ingredients, meaningful doses, and complete transparency about what you are taking and why. No overcrowded blends. No vague claims. Just precise, science-grounded supplementation &mdash; presented as the luxury wellness ritual it deserves to be.</p>
+      </div>
+      <div class="pillars reveal">
+        <div class="pillar">
+          <div class="pillar-num">01</div>
+          <div class="pillar-name">Clinical Integrity</div>
+          <div class="pillar-desc">Every ingredient dosed at levels aligned with clinical research &mdash; not calibrated for a label.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">02</div>
+          <div class="pillar-name">Radical Transparency</div>
+          <div class="pillar-desc">No proprietary blends. Every ingredient, every amount, every reason &mdash; stated clearly.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">03</div>
+          <div class="pillar-name">Quiet Luxury</div>
+          <div class="pillar-desc">Designed to sit on a clinic shelf and a vanity with equal elegance.</div>
+        </div>
+        <div class="pillar">
+          <div class="pillar-num">04</div>
+          <div class="pillar-name">Female-First Science</div>
+          <div class="pillar-desc">Built entirely around the hormonal landscape of women &mdash; not adapted from it.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATHWAYS -->
+<div class="section pathways" id="science">
+  <div class="section-inner">
+    <div class="pathways-intro">
+      <div class="reveal">
+        <span class="eyebrow">The Science</span>
+        <h2 class="section-title">Four pathways.<br>One <em>complete</em> formula.</h2>
+      </div>
+      <div class="reveal">
+        <p class="section-body">Hormonal imbalance rarely has a single cause. The pathways governing estrogen, androgens, insulin, and cycle regulation are deeply interconnected. Addressing one without the others delivers partial results at best. ENVI targets all four simultaneously &mdash; with the smallest number of ingredients that achieve comprehensive hormonal support.</p>
+      </div>
+    </div>
+    <div class="pathways-grid reveal">
+      <div class="pathway">
+        <div class="pathway-num">01</div>
+        <div class="pathway-title">Estrogen Metabolism</div>
+        <p class="pathway-body">Poor estrogen detoxification leads to estrogen dominance &mdash; the driver behind hormonal acne, mood fluctuations, and cycle irregularity. Supporting the liver&rsquo;s processing pathways helps restore healthy hormonal ratios.</p>
+        <div class="pathway-ings">DIM &middot; Methylfolate &middot; Methylcobalamin</div>
+      </div>
+      <div class="pathway">
+        <div class="pathway-num">02</div>
+        <div class="pathway-title">Androgen Balance</div>
+        <p class="pathway-body">Elevated androgens stimulate the sebaceous glands, increasing oil production and driving hormonal breakouts. Restoring androgen balance is one of the most direct routes to clearer, calmer skin.</p>
+        <div class="pathway-ings">DIM &middot; Myo-Inositol</div>
+      </div>
+      <div class="pathway">
+        <div class="pathway-num">03</div>
+        <div class="pathway-title">Insulin Signaling</div>
+        <p class="pathway-body">Insulin resistance elevates androgen production in the ovaries &mdash; a primary driver of hormonal acne and PCOS. Improving insulin sensitivity at the cellular level reduces androgen excess from the source.</p>
+        <div class="pathway-ings">Myo-Inositol &middot; D-Chiro-Inositol (40:1)</div>
+      </div>
+      <div class="pathway">
+        <div class="pathway-num">04</div>
+        <div class="pathway-title">Cycle Regulation</div>
+        <p class="pathway-body">Progesterone deficiency and erratic pituitary signaling cause cycle irregularity, PMS, and mid-cycle hormonal surges. Restoring pituitary signaling supports more regular, balanced cycles.</p>
+        <div class="pathway-ings">Vitex Agnus-Castus &middot; P5P (B6)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUCT -->
+<div class="section product" id="product">
+  <div class="section-inner">
+    <div class="product-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--rose);">The Formula</span>
+        <h2 class="section-title" style="color:var(--canvas);">Hormonal<br><em style="color:var(--rose-lt);">Balance</em></h2>
+        <p class="product-desc">Seven precisely dosed ingredients. Four hormonal pathways. One daily ritual. ENVI&rsquo;s launch formula is designed to be the only hormonal supplement a woman needs &mdash; complete, transparent, and beautiful enough to earn a place on her vanity.</p>
+        <div class="product-specs">
+          <div class="spec-row">
+            <span class="spec-label">Format</span>
+            <span class="spec-value">HPMC Plant-Based Capsules</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Supply</span>
+            <span class="spec-value">60 Capsules &mdash; 30 Day Supply</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Dosing</span>
+            <span class="spec-value">1 Morning &middot; 1 Evening</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Certification</span>
+            <span class="spec-value">Halal Certified</span>
+          </div>
+          <div class="spec-row">
+            <span class="spec-label">Key Ingredients</span>
+            <span class="spec-value">DIM &middot; Inositol &middot; Vitex &middot; Methylated B Vitamins</span>
+          </div>
+        </div>
+        <a href="#contact" class="btn-canvas">Enquire for Your Clinic</a>
+      </div>
+      <div class="product-bottle reveal">
+        <img
+          src="https://raw.githubusercontent.com/ssekrieh/envi-website/main/Bottle_Design_2.png"
+          alt="ENVI Hormonal Balance"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CLINICS -->
+<div class="section" id="clinics" style="background:var(--canvas);">
+  <div class="section-inner">
+    <div class="reveal">
+      <span class="eyebrow">For Clinics &amp; Practitioners</span>
+      <h2 class="section-title">A supplement your<br>patients will <em>trust.</em></h2>
+      <p class="section-body">ENVI was designed with clinic distribution as its foundation. Every element &mdash; from the formulation rationale to the packaging &mdash; is built to support the confidence of the practitioners who recommend it.</p>
+    </div>
+    <div class="clinics-grid reveal">
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x211E;</div>
+        <div class="clinic-title">Clinical Credibility</div>
+        <p class="clinic-body">Every ingredient is supported by published clinical research. We provide full ingredient dossiers, dosing rationale, and contraindication guidance for practitioner review.</p>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x25CA;</div>
+        <div class="clinic-title">Premium Patient Experience</div>
+        <p class="clinic-body">Packaging and presentation designed to reflect the standard of your clinic. ENVI belongs on a consultation desk &mdash; not a pharmacy shelf.</p>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x2736;</div>
+        <div class="clinic-title">GCC Market Ready</div>
+        <p class="clinic-body">Halal certified, GCC-compliant formulation designed specifically for the UAE, Qatar, and Saudi Arabia markets with regional regulatory considerations built in.</p>
+      </div>
+    </div>
+    <div class="clinic-cta-block reveal">
+      <div class="clinic-cta-title">Interested in stocking ENVI?</div>
+      <p class="clinic-cta-sub">We partner with dermatology clinics, aesthetic practices, and women&rsquo;s health practitioners across the GCC. Get in touch to receive our full clinical dossier and partnership information.</p>
+      <a href="mailto:clinics@envinu.com" class="btn-dark">Request Clinic Information</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <img
+        src="https://raw.githubusercontent.com/ssekrieh/envi-website/main/envi-logo-white.PNG"
+        alt="ENVI Nutrition"
+        style="height:26px;width:auto;display:block;margin-bottom:18px;"
+      />
+      <p class="footer-tagline">Where energy meets vitality. Precision hormonal nutrition for the woman who invests in herself.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <a href="#about">About ENVI</a>
+      <a href="#science">The Science</a>
+      <a href="#product">The Formula</a>
+      <a href="#clinics">For Clinics</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Learn</div>
+      <a href="#">Hormonal Health Blog</a>
+      <a href="#">The Four Pathways</a>
+      <a href="#">Ingredient Glossary</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:clinics@envinu.com">clinics@envinu.com</a>
+      <a href="#">Instagram</a>
+      <a href="#">Clinic Partnership Enquiry</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 ENVI Nutrition. All rights reserved.</span>
+    <span class="footer-disc">These statements have not been evaluated by a regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use.</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').style.boxShadow =
+      window.scrollY > 20 ? '0 2px 24px rgba(42,36,32,0.07)' : 'none';
+  });
+</script>
+</body>
+</html>
