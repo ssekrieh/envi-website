@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Science — ENVI Nutrition</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas:   #FDFCFB;
+  --warm:     #F7F4F1;
+  --border:   #E5DDD7;
+  --rose:     #B8966E;
+  --rose-lt:  #D4B896;
+  --ash:      #8A8078;
+  --ink:      #2A2420;
+  --charcoal: #3D3530;
+  --serif:    'Cormorant Garamond', serif;
+  --sans:     'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  margin: 0; padding: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(253,252,251,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 76px; transition: box-shadow 0.3s;
+}
+.nav-logo img { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ash);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--canvas) !important;
+  padding: 12px 26px;
+  font-size: 10px !important; font-weight: 500 !important;
+  letter-spacing: 2.5px !important;
+  text-decoration: none;
+  transition: background 0.25s !important;
+}
+.nav-cta:hover { background: var(--rose) !important; }
+
+/* ── SCIENCE HERO ── */
+.science-hero {
+  background: var(--ink);
+  margin-top: 76px;
+  padding: 140px 64px 120px;
+  display: flex; justify-content: center;
+}
+.science-hero-inner { max-width: 760px; text-align: center; }
+.hero-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 28px;
+}
+.science-headline {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 58px; line-height: 1.14; color: var(--canvas);
+  margin-bottom: 32px;
+}
+.science-headline em { color: var(--rose-lt); font-style: italic; }
+.science-sub {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; max-width: 560px; margin: 0 auto;
+}
+
+/* ── SECTIONS ── */
+.section { padding: 112px 64px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.section-inner.narrow { max-width: 780px; }
+.eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 18px;
+}
+.section-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 50px; line-height: 1.12; color: var(--ink); margin-bottom: 22px;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+.section-body {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: var(--charcoal); max-width: 620px;
+}
+.section-body p + p { margin-top: 20px; }
+
+/* ── INTRO / WHY TOGETHER ── */
+.intro { text-align: center; }
+.intro .eyebrow, .intro .section-title { text-align: center; }
+.intro .section-title { max-width: 700px; margin-left: auto; margin-right: auto; }
+.pull-quote {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 30px; line-height: 1.7; color: var(--ink);
+  border-left: 1px solid var(--rose); padding-left: 30px;
+  margin: 44px auto; max-width: 620px; text-align: left;
+}
+.intro .section-body { margin: 0 auto; text-align: left; }
+
+/* ── PATHWAY DETAIL ROWS ── */
+.pathways-section { background: var(--warm); }
+.pathways-section-intro { max-width: 640px; margin-bottom: 72px; }
+.pathway-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: start;
+  padding: 56px 0; border-top: 1px solid var(--border);
+}
+.pathway-row:last-child { border-bottom: 1px solid var(--border); }
+.pathway-row-num {
+  font-family: var(--serif); font-size: 15px; font-style: italic;
+  color: var(--rose); margin-bottom: 14px;
+}
+.pathway-row-title {
+  font-family: var(--serif); font-size: 32px; font-weight: 400;
+  color: var(--ink); margin-bottom: 18px; line-height: 1.15;
+}
+.pathway-row-body {
+  font-size: 14px; font-weight: 300; line-height: 1.9;
+  color: var(--charcoal);
+}
+.ingredient-panel { display: flex; flex-direction: column; gap: 2px; }
+.ingredient-card {
+  background: var(--canvas); border: 1px solid var(--border);
+  padding: 22px 26px;
+}
+.ingredient-name {
+  font-size: 11px; font-weight: 500; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 8px;
+}
+.ingredient-role {
+  font-size: 13px; font-weight: 300; line-height: 1.75; color: var(--ash);
+}
+
+/* ── MINIMAL FORMULA ── */
+.minimal { background: var(--ink); }
+.minimal-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+}
+.minimal-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; margin-bottom: 20px;
+}
+.compare-table { display: flex; flex-direction: column; gap: 2px; }
+.compare-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.compare-cell {
+  padding: 20px 26px; font-size: 13px; font-weight: 300; line-height: 1.6;
+}
+.compare-cell.head {
+  font-size: 9px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; padding: 16px 26px;
+}
+.compare-cell.kitchen { color: #7A6F66; border-right: 1px solid rgba(255,255,255,0.08); }
+.compare-cell.kitchen.head { color: #7A6F66; }
+.compare-cell.envi { color: #D4C0A8; }
+.compare-cell.envi.head { color: var(--rose-lt); }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 72px 64px 36px; }
+.footer-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 56px; margin-bottom: 56px;
+}
+.footer-tagline {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 14px; color: #8A7E78; line-height: 1.75; max-width: 220px;
+}
+.footer-col-title {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 18px;
+}
+.footer-col a {
+  display: block; font-size: 13px; font-weight: 300;
+  color: #6A6058; text-decoration: none; margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--canvas); }
+.footer-bottom {
+  max-width: 1080px; margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 11px; font-weight: 300; color: #4A4038; }
+.footer-disc {
+  font-size: 11px; font-weight: 300; color: #4A4038;
+  max-width: 480px; text-align: right; line-height: 1.65;
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 28px; }
+  .nav-links { gap: 16px; }
+  .science-hero { padding: 96px 28px 72px; }
+  .science-headline { font-size: 42px; }
+  .section { padding: 80px 28px; }
+  .section-title { font-size: 38px; }
+  .pathway-row, .minimal-grid { grid-template-columns: 1fr; gap: 32px; }
+  .compare-cell { font-size: 12px; padding: 16px 18px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-disc { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="envi-logo-black.PNG" alt="ENVI Nutrition"/>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="science.html" class="active">The Science</a>
+    <a href="index.html#product">The Formula</a>
+    <a href="index.html#clinics">For Clinics</a>
+    <a href="about.html">About</a>
+    <a href="index.html#contact" class="nav-cta">Clinic Enquiries</a>
+  </div>
+</nav>
+
+<!-- SCIENCE HERO -->
+<div class="science-hero">
+  <div class="science-hero-inner">
+    <div class="hero-eyebrow">The Science</div>
+    <h1 class="science-headline">Four pathways.<br>One <em>hormonal system.</em></h1>
+    <p class="science-sub">Hormonal acne, PCOS, and cycle irregularity rarely have a single cause. They emerge from four interconnected pathways &mdash; estrogen, androgens, insulin, and cycle signaling &mdash; each influencing the others. ENVI is formulated to address all four at once.</p>
+  </div>
+</div>
+
+<!-- INTRO -->
+<div class="section intro" id="why-together" style="background:var(--canvas);">
+  <div class="section-inner narrow">
+    <span class="eyebrow reveal">Why Together</span>
+    <h2 class="section-title reveal">You can&rsquo;t fix one pathway<br>and expect the rest to <em>follow.</em></h2>
+    <div class="reveal">
+      <div class="pull-quote">Estrogen, androgens, insulin, and cycle signaling don&rsquo;t operate in isolation &mdash; they operate as a loop. Treat one in isolation, and the other three quietly undo your progress.</div>
+      <div class="section-body">
+        <p>Most supplements are built around a single mechanism &mdash; a spot-treatment for one symptom. But the female hormonal system doesn&rsquo;t work that way. Insulin resistance drives ovarian androgen output. Excess androgens disrupt the estrogen-progesterone balance. Poor estrogen clearance intensifies androgen sensitivity. Erratic cycle signaling compounds all three.</p>
+        <p>This is why isolated interventions &mdash; a single herb, a single vitamin, a single &ldquo;hormone balance&rdquo; claim &mdash; so often disappoint. ENVI was formulated differently: four pathways, addressed simultaneously, with the smallest number of ingredients that achieve comprehensive coverage.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PATHWAY DETAIL -->
+<div class="section pathways-section" id="pathways">
+  <div class="section-inner">
+    <div class="pathways-section-intro reveal">
+      <span class="eyebrow">The Four Pathways</span>
+      <h2 class="section-title">How ENVI works,<br><em>pathway by pathway.</em></h2>
+    </div>
+
+    <div class="pathway-row reveal">
+      <div>
+        <div class="pathway-row-num">Pathway 01</div>
+        <h3 class="pathway-row-title">Estrogen Metabolism</h3>
+        <p class="pathway-row-body">The liver clears estrogen through a two-phase detoxification process. When these pathways are sluggish &mdash; from nutrient depletion, poor liver function, or common genetic variants in methylation genes &mdash; estrogen isn&rsquo;t broken down and cleared efficiently. The result is estrogen dominance: estrogen unbalanced relative to progesterone. This is a leading driver of hormonal acne along the jawline, breast tenderness, mood fluctuations, and heavier or irregular periods.</p>
+      </div>
+      <div class="ingredient-panel">
+        <div class="ingredient-card">
+          <div class="ingredient-name">DIM (Diindolylmethane)</div>
+          <div class="ingredient-role">Supports healthy estrogen metabolism by promoting a more favorable balance of estrogen metabolites, helping the liver clear excess estrogen rather than recirculate it.</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-name">Methylfolate &amp; Methylcobalamin</div>
+          <div class="ingredient-role">Active, body-ready forms of B9 and B12 that fuel methylation &mdash; the biochemical process the liver depends on to safely deactivate and clear estrogen, especially important for women with reduced methylation capacity.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pathway-row reveal">
+      <div>
+        <div class="pathway-row-num">Pathway 02</div>
+        <h3 class="pathway-row-title">Androgen Balance</h3>
+        <p class="pathway-row-body">Androgens are present in every woman&rsquo;s body, but become disruptive in excess. Elevated androgens over-stimulate the sebaceous glands, increasing oil production and creating the plugged, inflamed pore environment where acne-causing bacteria thrive. This is the mechanism behind persistent jawline and chin breakouts, adult-onset acne, and excess facial or body hair.</p>
+      </div>
+      <div class="ingredient-panel">
+        <div class="ingredient-card">
+          <div class="ingredient-name">DIM</div>
+          <div class="ingredient-role">Helps modulate androgen metabolism, supporting a healthier balance between estrogen and androgen activity at the tissue level.</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-name">Myo-Inositol</div>
+          <div class="ingredient-role">Improves cellular insulin sensitivity, which in turn reduces the ovarian signal that drives excess androgen production &mdash; addressing the root cause rather than the downstream symptom.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pathway-row reveal">
+      <div>
+        <div class="pathway-row-num">Pathway 03</div>
+        <h3 class="pathway-row-title">Insulin Signaling</h3>
+        <p class="pathway-row-body">When cells become resistant to insulin, the body compensates by producing more of it. Excess insulin directly stimulates the ovaries to produce more androgens &mdash; one of the primary mechanisms behind PCOS-related acne, irregular cycles, and stubborn weight gain. Improving insulin sensitivity at the cellular level is one of the most effective ways to reduce androgen excess at its source, rather than managing its downstream effects.</p>
+      </div>
+      <div class="ingredient-panel">
+        <div class="ingredient-card">
+          <div class="ingredient-name">Myo-Inositol &amp; D-Chiro-Inositol (40:1)</div>
+          <div class="ingredient-role">This specific 40:1 ratio mirrors the natural balance found in healthy ovarian tissue and is the ratio most studied in clinical research for improving insulin sensitivity and ovulatory function. Mismatched ratios &mdash; common in lower-cost 1:1 blends &mdash; can actually impair egg quality and worsen insulin signaling.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pathway-row reveal">
+      <div>
+        <div class="pathway-row-num">Pathway 04</div>
+        <h3 class="pathway-row-title">Cycle Regulation</h3>
+        <p class="pathway-row-body">Progesterone is the calming counterbalance to estrogen, rising in the second half of the cycle to stabilize mood and prepare the body for menstruation. When pituitary signaling to the ovaries is erratic or progesterone production is insufficient, the result is a shortened luteal phase, PMS, mid-cycle spotting, and unpredictable cycle length.</p>
+      </div>
+      <div class="ingredient-panel">
+        <div class="ingredient-card">
+          <div class="ingredient-name">Vitex Agnus-Castus (Chasteberry)</div>
+          <div class="ingredient-role">Supports healthy pituitary signaling to encourage the body&rsquo;s own natural progesterone production and promote a more regular menstrual cycle.</div>
+        </div>
+        <div class="ingredient-card">
+          <div class="ingredient-name">P5P (Activated Vitamin B6)</div>
+          <div class="ingredient-role">The bioactive form of B6, supporting progesterone synthesis and healthy prolactin regulation &mdash; easing PMS symptoms like mood swings and breast tenderness.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MINIMAL FORMULA -->
+<div class="section minimal" id="minimal">
+  <div class="section-inner">
+    <div class="minimal-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--rose);">Our Approach</span>
+        <h2 class="section-title" style="color:var(--canvas);">Minimal by design,<br>not by <em style="color:var(--rose-lt);">accident.</em></h2>
+        <p class="minimal-desc">Most supplements are built to impress on the label &mdash; twenty, thirty ingredients, each included at a fraction of the dose shown to do anything in research. It reads as generous. It performs as diluted.</p>
+        <p class="minimal-desc">ENVI takes the opposite approach: seven ingredients, dosed at the levels clinical research actually supports, mapped precisely to the four pathways that matter. Nothing is included to fill space on a label. Nothing is under-dosed to fit a proprietary blend. Every capsule does exactly what it claims to &mdash; and nothing it doesn&rsquo;t.</p>
+      </div>
+      <div class="reveal">
+        <div class="compare-table">
+          <div class="compare-row">
+            <div class="compare-cell kitchen head">Kitchen-Sink Formula</div>
+            <div class="compare-cell envi head">The ENVI Formula</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell kitchen">20&ndash;30&plus; ingredients, most at token doses</div>
+            <div class="compare-cell envi">7 ingredients, all clinically dosed</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell kitchen">Proprietary blends hide exact amounts</div>
+            <div class="compare-cell envi">Every ingredient and dose disclosed</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell kitchen">Ingredients chosen for marketing appeal</div>
+            <div class="compare-cell envi">Ingredients chosen for pathway coverage</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell kitchen">One mechanism, broadly applied</div>
+            <div class="compare-cell envi">Four pathways, precisely targeted</div>
+          </div>
+          <div class="compare-row">
+            <div class="compare-cell kitchen">Generic, unisex formulation</div>
+            <div class="compare-cell envi">Built entirely around female hormonal biology</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <img
+        src="envi-logo-white.PNG"
+        alt="ENVI Nutrition"
+        style="height:26px;width:auto;display:block;margin-bottom:18px;"
+      />
+      <p class="footer-tagline">Where energy meets vitality. Precision hormonal nutrition for the woman who invests in herself.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <a href="about.html">About ENVI</a>
+      <a href="science.html">The Science</a>
+      <a href="index.html#product">The Formula</a>
+      <a href="index.html#clinics">For Clinics</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Learn</div>
+      <a href="#">Hormonal Health Blog</a>
+      <a href="science.html#pathways">The Four Pathways</a>
+      <a href="#">Ingredient Glossary</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:clinics@envinu.com">clinics@envinu.com</a>
+      <a href="#">Instagram</a>
+      <a href="#">Clinic Partnership Enquiry</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 ENVI Nutrition. All rights reserved.</span>
+    <span class="footer-disc">These statements have not been evaluated by a regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use.</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').style.boxShadow =
+      window.scrollY > 20 ? '0 2px 24px rgba(42,36,32,0.07)' : 'none';
+  });
+</script>
+</body>
+</html>
