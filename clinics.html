@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For Clinics — ENVI Nutrition</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas:   #FDFCFB;
+  --warm:     #F7F4F1;
+  --border:   #E5DDD7;
+  --rose:     #B8966E;
+  --rose-lt:  #D4B896;
+  --ash:      #8A8078;
+  --ink:      #2A2420;
+  --charcoal: #3D3530;
+  --serif:    'Cormorant Garamond', serif;
+  --sans:     'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  margin: 0; padding: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(253,252,251,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 76px; transition: box-shadow 0.3s;
+}
+.nav-logo img { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ash);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--canvas) !important;
+  padding: 12px 26px;
+  font-size: 10px !important; font-weight: 500 !important;
+  letter-spacing: 2.5px !important;
+  text-decoration: none;
+  transition: background 0.25s !important;
+}
+.nav-cta:hover { background: var(--rose) !important; }
+
+/* ── CLINICS HERO ── */
+.clinics-hero {
+  background: var(--ink);
+  margin-top: 76px;
+  padding: 140px 64px 120px;
+  display: flex; justify-content: center;
+}
+.clinics-hero-inner { max-width: 760px; text-align: center; }
+.hero-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 28px;
+}
+.clinics-headline {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 58px; line-height: 1.14; color: var(--canvas);
+  margin-bottom: 32px;
+}
+.clinics-headline em { color: var(--rose-lt); font-style: italic; }
+.clinics-sub {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; max-width: 560px; margin: 0 auto 44px;
+}
+.clinics-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+.btn-rose {
+  display: inline-block; padding: 15px 34px;
+  background: var(--rose); color: var(--canvas);
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-rose:hover { background: var(--rose-lt); transform: translateY(-1px); }
+.btn-ghost-light {
+  display: inline-block; padding: 15px 34px;
+  border: 1px solid rgba(255,255,255,0.18); color: #B0A89E;
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+.btn-ghost-light:hover { border-color: var(--rose); color: var(--rose); }
+
+/* ── SECTIONS ── */
+.section { padding: 112px 64px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.section-inner.narrow { max-width: 780px; }
+.eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 18px;
+}
+.section-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 50px; line-height: 1.12; color: var(--ink); margin-bottom: 22px;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+.section-body {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: var(--charcoal); max-width: 620px;
+}
+.section-body p + p { margin-top: 20px; }
+
+/* ── WHY CLINICS FIRST ── */
+.why-first { text-align: center; }
+.why-first .eyebrow, .why-first .section-title { text-align: center; }
+.why-first .section-title { max-width: 700px; margin-left: auto; margin-right: auto; }
+.pull-quote {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 30px; line-height: 1.7; color: var(--ink);
+  border-left: 1px solid var(--rose); padding-left: 30px;
+  margin: 44px auto; max-width: 620px; text-align: left;
+}
+.why-first .section-body { margin: 0 auto; text-align: left; }
+
+/* ── VALUE PROPS ── */
+.value-props { background: var(--warm); }
+.value-props-intro { max-width: 640px; margin-bottom: 64px; }
+.clinics-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 2px;
+}
+.clinic-card {
+  padding: 42px 34px; border: 1px solid var(--border);
+  background: var(--canvas);
+  transition: background 0.2s, border-color 0.2s; cursor: default;
+}
+.clinic-card:hover { background: var(--warm); border-color: var(--rose-lt); }
+.clinic-icon {
+  font-family: var(--serif); font-size: 32px;
+  color: var(--rose); margin-bottom: 16px; line-height: 1;
+}
+.clinic-title {
+  font-family: var(--serif); font-size: 20px;
+  font-weight: 400; color: var(--ink); margin-bottom: 10px;
+}
+.clinic-body { font-size: 13px; font-weight: 300; color: var(--ash); line-height: 1.8; }
+
+/* ── WHAT YOU RECEIVE ── */
+.receive-intro { max-width: 640px; margin-bottom: 64px; }
+.receive-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+.receive-card {
+  padding: 44px 40px; border: 1px solid var(--border);
+  transition: background 0.2s, border-color 0.2s; cursor: default;
+}
+.receive-card:hover { background: var(--warm); border-color: var(--rose-lt); }
+.receive-num {
+  font-family: var(--serif); font-style: italic;
+  font-size: 13px; color: var(--rose); margin-bottom: 10px;
+}
+.receive-name {
+  font-family: var(--serif); font-size: 24px;
+  font-weight: 400; color: var(--ink); margin-bottom: 12px;
+}
+.receive-desc { font-size: 13px; font-weight: 300; color: var(--ash); line-height: 1.85; max-width: 380px; }
+
+/* ── ENQUIRY FORM ── */
+.enquiry { background: var(--ink); }
+.enquiry-intro { max-width: 640px; margin-bottom: 56px; }
+.enquiry-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; max-width: 560px; margin-top: 22px;
+}
+.enquiry-form { max-width: 680px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+.form-field { margin-bottom: 30px; }
+.form-field label {
+  display: block; font-size: 9px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 12px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1px solid rgba(255,255,255,0.18);
+  padding: 12px 2px; font-family: var(--sans); font-size: 14px; font-weight: 300;
+  color: var(--canvas); outline: none; transition: border-color 0.25s;
+  appearance: none; -webkit-appearance: none;
+}
+.form-field select {
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath fill='%23B8966E' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 4px center; background-size: 10px 7px;
+}
+.form-field select option { color: var(--ink); }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: #5C534C; }
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus { border-bottom-color: var(--rose); }
+.form-field textarea { resize: vertical; min-height: 100px; }
+.btn-rose-submit {
+  display: inline-block; padding: 15px 40px;
+  background: var(--rose); color: var(--canvas); border: none;
+  font-family: var(--sans); font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; cursor: pointer;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-rose-submit:hover { background: var(--rose-lt); transform: translateY(-1px); }
+.enquiry-alt {
+  margin-top: 26px; font-size: 12px; font-weight: 300; color: #7A6F66;
+}
+.enquiry-alt a { color: var(--rose-lt); text-decoration: none; }
+.enquiry-alt a:hover { text-decoration: underline; }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 72px 64px 36px; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 56px; margin-bottom: 56px;
+}
+.footer-tagline {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 14px; color: #8A7E78; line-height: 1.75; max-width: 220px;
+}
+.footer-col-title {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 18px;
+}
+.footer-col a {
+  display: block; font-size: 13px; font-weight: 300;
+  color: #6A6058; text-decoration: none; margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--canvas); }
+.footer-bottom {
+  max-width: 1080px; margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 11px; font-weight: 300; color: #4A4038; }
+.footer-disc {
+  font-size: 11px; font-weight: 300; color: #4A4038;
+  max-width: 480px; text-align: right; line-height: 1.65;
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 28px; }
+  .nav-links { gap: 16px; }
+  .clinics-hero { padding: 96px 28px 72px; }
+  .clinics-headline { font-size: 42px; }
+  .section { padding: 80px 28px; }
+  .section-title { font-size: 38px; }
+  .clinics-grid, .receive-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-disc { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="envi-logo-black.PNG" alt="ENVI Nutrition"/>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="science.html">The Science</a>
+    <a href="index.html#product">The Formula</a>
+    <a href="clinics.html" class="active">For Clinics</a>
+    <a href="about.html">About</a>
+    <a href="clinics.html#enquiry" class="nav-cta">Clinic Enquiries</a>
+  </div>
+</nav>
+
+<!-- CLINICS HERO -->
+<div class="clinics-hero">
+  <div class="clinics-hero-inner">
+    <div class="hero-eyebrow">For Clinics &amp; Practitioners</div>
+    <h1 class="clinics-headline">A supplement your<br>patients will <em>trust.</em></h1>
+    <p class="clinics-sub">ENVI partners with dermatology clinics, aesthetic practices, and women&rsquo;s health practitioners across the UAE, Qatar, and Saudi Arabia &mdash; giving your patients a hormonal supplement you can recommend with full confidence.</p>
+    <div class="clinics-hero-ctas">
+      <a href="#enquiry" class="btn-rose">Request Partnership</a>
+      <a href="science.html" class="btn-ghost-light">Review the Science</a>
+    </div>
+  </div>
+</div>
+
+<!-- WHY CLINICS FIRST -->
+<div class="section why-first" id="why-first" style="background:var(--canvas);">
+  <div class="section-inner narrow">
+    <span class="eyebrow reveal">Built Differently</span>
+    <h2 class="section-title reveal">Designed for the clinic,<br><em>before the shelf.</em></h2>
+    <div class="reveal">
+      <div class="pull-quote">Most supplement brands start with the consumer and hope a clinic eventually stocks them. ENVI started with the practitioner.</div>
+      <div class="section-body">
+        <p>ENVI was formulated with clinic distribution as its foundation, not an afterthought. Every ingredient, dose, and claim is built to withstand practitioner scrutiny &mdash; because the women we serve trust their doctors&rsquo; recommendations more than any marketing claim.</p>
+        <p>That meant making decisions most consumer wellness brands don&rsquo;t: full ingredient transparency instead of proprietary blends, clinically referenced dosing instead of trend-driven inclusions, and packaging restrained enough to sit on a consultation desk rather than shout from a shelf. The result is a formula practitioners can stand behind, and patients are proud to be seen using.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUE PROPS -->
+<div class="section value-props" id="value-props">
+  <div class="section-inner">
+    <div class="value-props-intro reveal">
+      <span class="eyebrow">Why Partner With ENVI</span>
+      <h2 class="section-title">Three reasons clinics<br>choose <em>ENVI.</em></h2>
+    </div>
+    <div class="clinics-grid reveal">
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x211E;</div>
+        <div class="clinic-title">Clinical Credibility</div>
+        <p class="clinic-body">Every ingredient is supported by published clinical research. We provide full ingredient dossiers, dosing rationale, and contraindication guidance for practitioner review before you ever recommend it.</p>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x25CA;</div>
+        <div class="clinic-title">Premium Patient Experience</div>
+        <p class="clinic-body">Packaging and presentation designed for the clinic environment, not the pharmacy shelf. ENVI belongs on a consultation desk &mdash; a product your patients feel confident being handed.</p>
+      </div>
+      <div class="clinic-card">
+        <div class="clinic-icon">&#x2736;</div>
+        <div class="clinic-title">GCC Market Ready</div>
+        <p class="clinic-body">Halal certified and fully compliant for distribution across the UAE, Qatar, and Saudi Arabia, with regional regulatory considerations built into the formulation from day one.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WHAT YOU RECEIVE -->
+<div class="section" id="receive" style="background:var(--canvas);">
+  <div class="section-inner">
+    <div class="receive-intro reveal">
+      <span class="eyebrow">Partnership Benefits</span>
+      <h2 class="section-title">What clinic partners<br><em>receive.</em></h2>
+      <p class="section-body">Every ENVI clinic partnership is supported end-to-end &mdash; from the first sample to ongoing patient education.</p>
+    </div>
+    <div class="receive-grid reveal">
+      <div class="receive-card">
+        <div class="receive-num">01</div>
+        <div class="receive-name">Product Samples</div>
+        <p class="receive-desc">Complimentary samples for your clinic to trial with patients before committing to a stocking order, so you can evaluate ENVI firsthand.</p>
+      </div>
+      <div class="receive-card">
+        <div class="receive-num">02</div>
+        <div class="receive-name">Clinical Dossier</div>
+        <p class="receive-desc">A full research dossier covering every ingredient, dosing rationale, mechanism of action, and contraindication guidance for practitioner review.</p>
+      </div>
+      <div class="receive-card">
+        <div class="receive-num">03</div>
+        <div class="receive-name">Patient Education Materials</div>
+        <p class="receive-desc">Consultation-ready materials explaining the four hormonal pathways in patient-friendly language, so recommending ENVI takes no extra effort.</p>
+      </div>
+      <div class="receive-card">
+        <div class="receive-num">04</div>
+        <div class="receive-name">Practitioner Support</div>
+        <p class="receive-desc">Direct access to our team for formulation questions, patient case discussions, and ongoing support as your partnership grows.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ENQUIRY FORM -->
+<div class="section enquiry" id="enquiry">
+  <div class="section-inner">
+    <div class="enquiry-intro reveal">
+      <span class="eyebrow" style="color:var(--rose);">Partner With Us</span>
+      <h2 class="section-title" style="color:var(--canvas);">Request clinic<br><em style="color:var(--rose-lt);">partnership.</em></h2>
+      <p class="enquiry-desc">Tell us about your practice and we&rsquo;ll follow up with samples, your clinical dossier, and partnership pricing tailored to your patient base.</p>
+    </div>
+    <form class="enquiry-form reveal" action="mailto:clinics@envinu.com" method="post" enctype="text/plain">
+      <div class="form-row">
+        <div class="form-field">
+          <label for="clinic-name">Clinic Name</label>
+          <input type="text" id="clinic-name" name="Clinic Name" required/>
+        </div>
+        <div class="form-field">
+          <label for="doctor-name">Doctor Name</label>
+          <input type="text" id="doctor-name" name="Doctor Name" required/>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label for="specialty">Specialty</label>
+          <input type="text" id="specialty" name="Specialty" placeholder="e.g. Dermatology, Aesthetics, Women's Health"/>
+        </div>
+        <div class="form-field">
+          <label for="country">Country</label>
+          <select id="country" name="Country" required>
+            <option value="">Select country</option>
+            <option>United Arab Emirates</option>
+            <option>Qatar</option>
+            <option>Saudi Arabia</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="Email" required/>
+      </div>
+      <div class="form-field">
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" rows="4" placeholder="Tell us about your clinic and patient base"></textarea>
+      </div>
+      <button type="submit" class="btn-rose-submit">Submit Enquiry</button>
+      <p class="enquiry-alt">Prefer email? Reach us directly at <a href="mailto:clinics@envinu.com">clinics@envinu.com</a></p>
+    </form>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <img
+        src="envi-logo-white.PNG"
+        alt="ENVI Nutrition"
+        style="height:26px;width:auto;display:block;margin-bottom:18px;"
+      />
+      <p class="footer-tagline">Where energy meets vitality. Precision hormonal nutrition for the woman who invests in herself.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <a href="about.html">About ENVI</a>
+      <a href="science.html">The Science</a>
+      <a href="index.html#product">The Formula</a>
+      <a href="clinics.html">For Clinics</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Learn</div>
+      <a href="#">Hormonal Health Blog</a>
+      <a href="science.html#pathways">The Four Pathways</a>
+      <a href="#">Ingredient Glossary</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:clinics@envinu.com">clinics@envinu.com</a>
+      <a href="#">Instagram</a>
+      <a href="clinics.html#enquiry">Clinic Partnership Enquiry</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 ENVI Nutrition. All rights reserved.</span>
+    <span class="footer-disc">These statements have not been evaluated by a regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use.</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').style.boxShadow =
+      window.scrollY > 20 ? '0 2px 24px rgba(42,36,32,0.07)' : 'none';
+  });
+</script>
+</body>
+</html>
