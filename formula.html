@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Formula — Hormonal Balance — ENVI Nutrition</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --canvas:   #FDFCFB;
+  --warm:     #F7F4F1;
+  --border:   #E5DDD7;
+  --rose:     #B8966E;
+  --rose-lt:  #D4B896;
+  --ash:      #8A8078;
+  --ink:      #2A2420;
+  --charcoal: #3D3530;
+  --serif:    'Cormorant Garamond', serif;
+  --sans:     'DM Sans', sans-serif;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--canvas);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  margin: 0; padding: 0;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(253,252,251,0.97);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border);
+  padding: 0 60px;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 76px; transition: box-shadow 0.3s;
+}
+.nav-logo img { height: 30px; width: auto; display: block; }
+.nav-links { display: flex; gap: 36px; align-items: center; }
+.nav-links a {
+  font-size: 10px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--ash);
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+.nav-links a.active { color: var(--ink); }
+.nav-cta {
+  background: var(--ink) !important;
+  color: var(--canvas) !important;
+  padding: 12px 26px;
+  font-size: 10px !important; font-weight: 500 !important;
+  letter-spacing: 2.5px !important;
+  text-decoration: none;
+  transition: background 0.25s !important;
+}
+.nav-cta:hover { background: var(--rose) !important; }
+
+/* ── FORMULA HERO ── */
+.formula-hero {
+  background: var(--ink);
+  margin-top: 76px;
+  padding: 96px 64px;
+}
+.formula-hero-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+}
+.hero-eyebrow {
+  font-size: 10px; font-weight: 500; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 28px;
+}
+.formula-headline {
+  font-family: var(--serif); font-weight: 300; font-style: italic;
+  font-size: 60px; line-height: 1.08; color: var(--canvas);
+  margin-bottom: 26px;
+}
+.formula-headline em { color: var(--rose-lt); font-style: italic; }
+.formula-sub {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; max-width: 420px; margin-bottom: 44px;
+}
+.formula-hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
+.btn-rose {
+  display: inline-block; padding: 15px 34px;
+  background: var(--rose); color: var(--canvas);
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: background 0.25s, transform 0.2s;
+}
+.btn-rose:hover { background: var(--rose-lt); transform: translateY(-1px); }
+.btn-ghost-light {
+  display: inline-block; padding: 15px 34px;
+  border: 1px solid rgba(255,255,255,0.18); color: #B0A89E;
+  font-size: 10px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; text-decoration: none;
+  transition: border-color 0.25s, color 0.25s;
+}
+.btn-ghost-light:hover { border-color: var(--rose); color: var(--rose); }
+.formula-stats { display: flex; max-width: 400px; border: 1px solid rgba(255,255,255,0.1); }
+.formula-stat {
+  flex: 1; padding: 20px 16px; text-align: center;
+  border-right: 1px solid rgba(255,255,255,0.1);
+}
+.formula-stat:last-child { border-right: none; }
+.stat-num {
+  font-family: var(--serif); font-size: 32px; font-weight: 300;
+  color: var(--rose-lt); line-height: 1; margin-bottom: 6px;
+}
+.stat-label {
+  font-size: 9px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: #8A7E78;
+}
+.formula-bottle { display: flex; align-items: center; justify-content: center; }
+.formula-bottle img {
+  width: 100%; max-width: 380px; height: auto; object-fit: contain;
+  filter: drop-shadow(0 32px 64px rgba(0,0,0,0.45));
+  animation: floatUp 1.2s ease both;
+}
+@keyframes floatUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+.section { padding: 112px 64px; }
+.section-inner { max-width: 1080px; margin: 0 auto; }
+.section-inner.narrow { max-width: 780px; }
+.eyebrow {
+  display: block; font-size: 10px; font-weight: 500;
+  letter-spacing: 4px; text-transform: uppercase;
+  color: var(--rose); margin-bottom: 18px;
+}
+.section-title {
+  font-family: var(--serif); font-weight: 300;
+  font-size: 50px; line-height: 1.12; color: var(--ink); margin-bottom: 22px;
+}
+.section-title em { font-style: italic; color: var(--rose); }
+.section-body {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: var(--charcoal); max-width: 620px;
+}
+
+/* ── INGREDIENT TABLE ── */
+.table-intro { max-width: 640px; margin-bottom: 56px; }
+.formula-table-wrap { border: 1px solid var(--border); }
+.formula-row {
+  display: grid; grid-template-columns: 2fr 1fr 2fr;
+  gap: 24px; align-items: center;
+  padding: 22px 30px; border-bottom: 1px solid var(--border);
+}
+.formula-row:last-child { border-bottom: none; }
+.formula-row.head {
+  background: var(--warm);
+  padding: 16px 30px;
+}
+.formula-row.head > div {
+  font-size: 9px; font-weight: 500; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--rose);
+}
+.ing-name {
+  font-family: var(--serif); font-size: 19px; font-weight: 400; color: var(--ink);
+}
+.ing-dose { font-size: 13px; font-weight: 300; color: var(--charcoal); }
+.ing-pathway {
+  font-size: 10px; font-weight: 500; letter-spacing: 1.2px;
+  text-transform: uppercase; color: var(--ash);
+}
+.table-note {
+  margin-top: 22px; font-size: 12px; font-weight: 300;
+  color: var(--ash); max-width: 640px; line-height: 1.8;
+}
+
+/* ── DOSING ── */
+.dosing { background: var(--warm); }
+.dosing-intro { max-width: 640px; margin-bottom: 56px; }
+.dosing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.dose-card {
+  padding: 44px 40px; border: 1px solid var(--border); background: var(--canvas);
+}
+.dose-time {
+  font-family: var(--serif); font-style: italic; font-size: 13px;
+  color: var(--rose); margin-bottom: 10px;
+}
+.dose-title {
+  font-family: var(--serif); font-size: 28px; font-weight: 400;
+  color: var(--ink); margin-bottom: 18px;
+}
+.dose-ings {
+  display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 22px;
+}
+.dose-ing-tag {
+  font-size: 10px; font-weight: 500; letter-spacing: 1px;
+  text-transform: uppercase; color: var(--rose);
+  border: 1px solid var(--rose-lt); padding: 6px 12px;
+}
+.dose-desc { font-size: 13px; font-weight: 300; line-height: 1.85; color: var(--charcoal); }
+
+/* ── TIMELINE ── */
+.timeline-intro { max-width: 640px; margin-bottom: 64px; }
+.timeline-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.timeline-card {
+  padding: 44px 40px; border: 1px solid var(--border);
+  transition: background 0.2s, border-color 0.2s; cursor: default;
+}
+.timeline-card:hover { background: var(--warm); border-color: var(--rose-lt); }
+.timeline-num {
+  font-family: var(--serif); font-style: italic;
+  font-size: 13px; color: var(--rose); margin-bottom: 10px;
+}
+.timeline-name {
+  font-family: var(--serif); font-size: 24px;
+  font-weight: 400; color: var(--ink); margin-bottom: 12px;
+}
+.timeline-desc { font-size: 13px; font-weight: 300; color: var(--ash); line-height: 1.85; max-width: 400px; }
+
+/* ── QUALITY ── */
+.quality { background: var(--ink); }
+.quality-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 100px; align-items: center;
+}
+.quality-desc {
+  font-size: 15px; font-weight: 300; line-height: 1.9;
+  color: #B0A89E; margin-bottom: 22px;
+}
+.quality-specs { display: flex; flex-direction: column; }
+.quality-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 18px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.quality-row:first-child { border-top: 1px solid rgba(255,255,255,0.08); }
+.quality-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--ash);
+}
+.quality-value { font-size: 13px; font-weight: 300; color: #D4C0A8; text-align: right; max-width: 260px; }
+
+/* ── FOOTER ── */
+footer { background: var(--ink); padding: 72px 64px 36px; border-top: 1px solid rgba(255,255,255,0.05); }
+.footer-grid {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 56px; margin-bottom: 56px;
+}
+.footer-tagline {
+  font-family: var(--serif); font-style: italic; font-weight: 300;
+  font-size: 14px; color: #8A7E78; line-height: 1.75; max-width: 220px;
+}
+.footer-col-title {
+  font-size: 9px; font-weight: 500; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--rose); margin-bottom: 18px;
+}
+.footer-col a {
+  display: block; font-size: 13px; font-weight: 300;
+  color: #6A6058; text-decoration: none; margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--canvas); }
+.footer-bottom {
+  max-width: 1080px; margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.05);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; gap: 32px; flex-wrap: wrap;
+}
+.footer-copy { font-size: 11px; font-weight: 300; color: #4A4038; }
+.footer-disc {
+  font-size: 11px; font-weight: 300; color: #4A4038;
+  max-width: 480px; text-align: right; line-height: 1.65;
+}
+
+/* ── ANIMATIONS ── */
+.reveal {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 960px) {
+  nav { padding: 0 28px; }
+  .nav-links { gap: 16px; }
+  .formula-hero { padding: 72px 28px; }
+  .formula-hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .formula-headline { font-size: 42px; }
+  .formula-bottle { order: -1; }
+  .section { padding: 80px 28px; }
+  .section-title { font-size: 38px; }
+  .formula-row { grid-template-columns: 1fr; gap: 6px; padding: 20px 22px; }
+  .formula-row.head { display: none; }
+  .dosing-grid, .timeline-grid, .quality-grid { grid-template-columns: 1fr; gap: 32px; }
+  .quality-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .quality-value { text-align: left; max-width: none; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .footer-disc { text-align: left; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <div class="nav-logo">
+    <a href="index.html">
+      <img src="envi-logo-black.PNG" alt="ENVI Nutrition"/>
+    </a>
+  </div>
+  <div class="nav-links">
+    <a href="science.html">The Science</a>
+    <a href="formula.html" class="active">The Formula</a>
+    <a href="clinics.html">For Clinics</a>
+    <a href="about.html">About</a>
+    <a href="clinics.html#enquiry" class="nav-cta">Clinic Enquiries</a>
+  </div>
+</nav>
+
+<!-- FORMULA HERO -->
+<div class="formula-hero">
+  <div class="formula-hero-grid">
+    <div>
+      <div class="hero-eyebrow">The Formula</div>
+      <h1 class="formula-headline">Hormonal<br><em>Balance.</em></h1>
+      <p class="formula-sub">Seven precisely dosed ingredients. Four hormonal pathways. One daily ritual &mdash; designed to be the only hormonal supplement a woman needs.</p>
+      <div class="formula-hero-ctas">
+        <a href="#ingredients" class="btn-rose">View Full Formula</a>
+        <a href="clinics.html" class="btn-ghost-light">For Clinics</a>
+      </div>
+      <div class="formula-stats">
+        <div class="formula-stat">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Pathways</div>
+        </div>
+        <div class="formula-stat">
+          <div class="stat-num">7</div>
+          <div class="stat-label">Ingredients</div>
+        </div>
+        <div class="formula-stat">
+          <div class="stat-num">0</div>
+          <div class="stat-label">Fillers</div>
+        </div>
+      </div>
+    </div>
+    <div class="formula-bottle">
+      <img src="Bottle_Design_2.png" alt="ENVI Hormonal Balance"/>
+    </div>
+  </div>
+</div>
+
+<!-- COMPLETE FORMULA -->
+<div class="section" id="ingredients" style="background:var(--canvas);">
+  <div class="section-inner">
+    <div class="table-intro reveal">
+      <span class="eyebrow">The Complete Formula</span>
+      <h2 class="section-title">Seven ingredients.<br>Nothing <em>wasted.</em></h2>
+      <p class="section-body">Every ingredient in Hormonal Balance is dosed within the ranges shown in clinical research to support its target pathway &mdash; no fillers, no proprietary blends, no ingredients included for the label alone.</p>
+    </div>
+    <div class="formula-table-wrap reveal">
+      <div class="formula-row head">
+        <div>Ingredient</div>
+        <div>Dose Range</div>
+        <div>Pathway</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">DIM (Diindolylmethane)</div>
+        <div class="ing-dose">200&ndash;300mg</div>
+        <div class="ing-pathway">Estrogen Metabolism &middot; Androgen Balance</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">Myo-Inositol</div>
+        <div class="ing-dose">2000&ndash;4000mg</div>
+        <div class="ing-pathway">Insulin Signaling &middot; Androgen Balance</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">D-Chiro-Inositol</div>
+        <div class="ing-dose">50&ndash;100mg <span style="color:var(--rose);">(40:1 with Myo-Inositol)</span></div>
+        <div class="ing-pathway">Insulin Signaling</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">Vitex Agnus-Castus</div>
+        <div class="ing-dose">175&ndash;400mg <span style="color:var(--rose);">(std. 0.5% agnusides)</span></div>
+        <div class="ing-pathway">Cycle Regulation</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">Methylfolate (5-MTHF)</div>
+        <div class="ing-dose">400&ndash;800mcg</div>
+        <div class="ing-pathway">Estrogen Metabolism &middot; Methylation</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">Methylcobalamin (B12)</div>
+        <div class="ing-dose">500&ndash;1000mcg</div>
+        <div class="ing-pathway">Estrogen Metabolism</div>
+      </div>
+      <div class="formula-row">
+        <div class="ing-name">P5P (Vitamin B6)</div>
+        <div class="ing-dose">25&ndash;50mg</div>
+        <div class="ing-pathway">PMS &amp; Progesterone Support</div>
+      </div>
+    </div>
+    <p class="table-note reveal">Dose ranges reflect the clinically studied amounts for each ingredient. Exact per-capsule dosing is disclosed in full on product packaging and in our clinical dossier available to partner practitioners.</p>
+  </div>
+</div>
+
+<!-- DOSING PROTOCOL -->
+<div class="section dosing" id="dosing">
+  <div class="section-inner">
+    <div class="dosing-intro reveal">
+      <span class="eyebrow">Dosing Protocol</span>
+      <h2 class="section-title">One capsule morning,<br>one <em>evening.</em></h2>
+      <p class="section-body">Hormonal Balance is split across two daily capsules &mdash; not for convenience, but because timing changes how effectively each ingredient works.</p>
+    </div>
+    <div class="dosing-grid reveal">
+      <div class="dose-card">
+        <div class="dose-time">Morning Capsule</div>
+        <h3 class="dose-title">With breakfast</h3>
+        <div class="dose-ings">
+          <span class="dose-ing-tag">Myo-Inositol</span>
+          <span class="dose-ing-tag">D-Chiro-Inositol</span>
+          <span class="dose-ing-tag">Methylfolate</span>
+          <span class="dose-ing-tag">Methylcobalamin</span>
+        </div>
+        <p class="dose-desc">The inositols work best taken with food and support insulin sensitivity through the hours you&rsquo;re most metabolically active. The activated B vitamins support methylation and energy production from the start of the day, rather than being wasted overnight.</p>
+      </div>
+      <div class="dose-card">
+        <div class="dose-time">Evening Capsule</div>
+        <h3 class="dose-title">With dinner</h3>
+        <div class="dose-ings">
+          <span class="dose-ing-tag">DIM</span>
+          <span class="dose-ing-tag">Vitex Agnus-Castus</span>
+          <span class="dose-ing-tag">P5P (B6)</span>
+        </div>
+        <p class="dose-desc">DIM is absorbed more consistently alongside a meal containing fat. Vitex works through the pituitary&rsquo;s overnight signaling rhythm, and P5P supports the progesterone and prolactin regulation that eases PMS symptoms &mdash; both suited to an evening dose.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS TIMELINE -->
+<div class="section" id="timeline" style="background:var(--canvas);">
+  <div class="section-inner">
+    <div class="timeline-intro reveal">
+      <span class="eyebrow">What To Expect</span>
+      <h2 class="section-title">A timeline built on<br>how hormones <em>actually</em> shift.</h2>
+      <p class="section-body">Hormonal pathways recalibrate gradually, over full menstrual cycles &mdash; not overnight. Here is the honest timeline our formulation is designed around.</p>
+    </div>
+    <div class="timeline-grid reveal">
+      <div class="timeline-card">
+        <div class="timeline-num">Weeks 1&ndash;2</div>
+        <div class="timeline-name">Foundational Repletion</div>
+        <p class="timeline-desc">Methylated B vitamins and inositols begin replenishing cellular stores. Most women notice steadier energy before any visible skin or cycle changes &mdash; the groundwork is being laid.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">Weeks 3&ndash;4</div>
+        <div class="timeline-name">Early Shifts</div>
+        <p class="timeline-desc">Insulin sensitivity and estrogen clearance begin to improve. Skin texture and oil production often start to shift, and PMS symptoms may feel slightly less intense heading into the next cycle.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">Months 2&ndash;3</div>
+        <div class="timeline-name">Visible Change</div>
+        <p class="timeline-desc">By the second and third full cycles, most women see a meaningful reduction in hormonal breakouts, more regular cycle length, and noticeably calmer PMS &mdash; the pathways are working in concert.</p>
+      </div>
+      <div class="timeline-card">
+        <div class="timeline-num">Months 3+</div>
+        <div class="timeline-name">Sustained Balance</div>
+        <p class="timeline-desc">With continued use, results compound: clearer skin, a predictable cycle, and stable energy become the new baseline rather than an occasional good month.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- QUALITY -->
+<div class="section quality" id="quality">
+  <div class="section-inner">
+    <div class="quality-grid">
+      <div class="reveal">
+        <span class="eyebrow" style="color:var(--rose);">Purity &amp; Certification</span>
+        <h2 class="section-title" style="color:var(--canvas);">Halal certified.<br><em style="color:var(--rose-lt);">Plant-based.</em></h2>
+        <p class="quality-desc">Hormonal Balance is Halal certified and encapsulated in HPMC &mdash; a plant-derived capsule shell, not gelatin &mdash; making it suitable for the widest possible range of patients across the GCC without compromise.</p>
+        <p class="quality-desc">Every batch is manufactured to pharmaceutical-grade standards and independently tested for purity and potency before release, so what&rsquo;s on the label is exactly what&rsquo;s in the capsule.</p>
+      </div>
+      <div class="reveal">
+        <div class="quality-specs">
+          <div class="quality-row">
+            <span class="quality-label">Certification</span>
+            <span class="quality-value">Halal Certified</span>
+          </div>
+          <div class="quality-row">
+            <span class="quality-label">Capsule Shell</span>
+            <span class="quality-value">HPMC &mdash; Plant-Based, No Gelatin</span>
+          </div>
+          <div class="quality-row">
+            <span class="quality-label">Fillers &amp; Binders</span>
+            <span class="quality-value">None</span>
+          </div>
+          <div class="quality-row">
+            <span class="quality-label">Testing</span>
+            <span class="quality-value">Third-Party Purity &amp; Potency Testing</span>
+          </div>
+          <div class="quality-row">
+            <span class="quality-label">Market Compliance</span>
+            <span class="quality-value">UAE &middot; Qatar &middot; Saudi Arabia</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="footer-grid">
+    <div>
+      <img
+        src="envi-logo-white.PNG"
+        alt="ENVI Nutrition"
+        style="height:26px;width:auto;display:block;margin-bottom:18px;"
+      />
+      <p class="footer-tagline">Where energy meets vitality. Precision hormonal nutrition for the woman who invests in herself.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Navigate</div>
+      <a href="about.html">About ENVI</a>
+      <a href="science.html">The Science</a>
+      <a href="formula.html">The Formula</a>
+      <a href="clinics.html">For Clinics</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Learn</div>
+      <a href="#">Hormonal Health Blog</a>
+      <a href="science.html#pathways">The Four Pathways</a>
+      <a href="#">Ingredient Glossary</a>
+      <a href="#">FAQ</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-col-title">Contact</div>
+      <a href="mailto:clinics@envinu.com">clinics@envinu.com</a>
+      <a href="#">Instagram</a>
+      <a href="clinics.html#enquiry">Clinic Partnership Enquiry</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">&copy; 2025 ENVI Nutrition. All rights reserved.</span>
+    <span class="footer-disc">These statements have not been evaluated by a regulatory authority. This product is not intended to diagnose, treat, cure, or prevent any disease. Consult your healthcare provider before use.</span>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('main-nav').style.boxShadow =
+      window.scrollY > 20 ? '0 2px 24px rgba(42,36,32,0.07)' : 'none';
+  });
+</script>
+</body>
+</html>
